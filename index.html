@@ -54,7 +54,7 @@ function add(c){
   if(found.includes(input)) return;
   found.push(input);
   score += input.length;
-  if(found.length === validWords.length){
+  if(found.length === validWords.length+1){
    render();
    setTimeout(() => newRack(false), 1000);
    return;
