@@ -5,6 +5,8 @@
 # 📜 **Scramble Instructions**
 Scramble that gets words internally from javascript window object.
 
+- Letters can be reused
+
 Penalties:
 - -3 for clicking Rack
 - -1 for clicking Back
