@@ -11,4 +11,6 @@ Penalties:
 
 In otherwords, try to complete a Rack. 
 Completely a Rack automatically gives new Rack.
-Back (backspace) is also a penalty, try to think the word in your head. Discourages spamming.
+Back (backspace) is also a penalty, try to think the word in your head. Discourages spamming.  
+
+Reveal is free. Maybe I'll make it decrement score for every second it is open.
