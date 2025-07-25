@@ -5,7 +5,7 @@
 # 📜 **Scramble Instructions**
 Scramble that gets words internally from javascript window object.
 
-- Letters can be reused
+- Letters can be reused. For example, lesp gives spell.
 
 Penalties:
 - -3 for clicking Rack
