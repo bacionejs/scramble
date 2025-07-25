@@ -3,7 +3,7 @@
 [![Demo – Click to Play](README.jpg)](https://bacionejs.github.io/scramble/)
 
 # 📜 **Scramble Instructions**
-Scramble that gets words internally from javascript.
+Scramble that gets words internally from javascript window object.
 
 Penalties:
 - -3 for clicking Rack
