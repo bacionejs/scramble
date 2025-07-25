@@ -6,8 +6,8 @@
 Scramble that gets words internally from javascript.
 
 Penalties:
--3 for clicking Rack
--1 for clicking Back
+- -3 for clicking Rack
+- -1 for clicking Back
 
 In otherwords, try to complete a Rack. 
 Completely a Rack automatically gives new Rack.
