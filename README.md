@@ -19,6 +19,6 @@ Reveal is free. Maybe I'll make it decrement score for every second it is open.
 
 # Dev Notes
 - Splits: camelcase, underscore
-- Ignores: numbers, all caps
+- Ignores: numbers, all caps, on-listeners
 - Recursion: 3
 - Chars: >2
