@@ -8,12 +8,8 @@ Scramble that gets 1799 words internally from javascript window object.
 - Letters can be reused. For example, `lesp` gives `spell`.
 
 Penalties:
-- -3 for clicking Rack
-- -1 for clicking Back
-
-In otherwords, try to complete a Rack. 
-Completely a Rack automatically gives new Rack.
-Back (backspace) is also a penalty, try to think the word before typing...discourages spamming.  
+- -3 for clicking Rack (complete to get new)
+- -1 for clicking Back (discourages spamming)
 
 Reveal is free. Maybe I'll make it decrement score for every second it is open.
 
