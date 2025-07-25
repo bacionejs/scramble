@@ -16,3 +16,7 @@ Completely a Rack automatically gives new Rack.
 Back (backspace) is also a penalty, try to think the word in your head. Discourages spamming.  
 
 Reveal is free. Maybe I'll make it decrement score for every second it is open.
+
+# Dev Notes
+- Splits: camelcase, underscore
+- Ignores: numbers, all caps
