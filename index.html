@@ -50,8 +50,8 @@ function newRack(penalize=true){
 
 function add(c){
  input += c;
+ if(found.includes(input)){ render(); return; }
  if(input.length >= 3 && w.has(input) && canMake(input, currentWord.split(''))){
-  if(found.includes(input)) return;
   found.push(input);
   score += input.length;
   if(found.length === validWords.length+1){
