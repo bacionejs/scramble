@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><body style="font-family:sans-serif;text-align:center"><script>
+<html><body style="font-family:sans-serif;text-align:center"><script>
 let w=new Set(),s=new WeakSet(),r=/[A-Z]?[a-z]+/g;
 ;(function f(o,d=0){
  if(d>3||s.has(o)||typeof o!=='object'&&typeof o!=='function'||!o)return;
@@ -11,7 +11,7 @@ let w=new Set(),s=new WeakSet(),r=/[A-Z]?[a-z]+/g;
   }
   try{f(o[k],d+1);}catch{}
  }
-})(window);
+})(this);
 
 let input='',found=[],score=3,letters=[],currentWord='',validWords=[],reveal=false;
 
@@ -77,8 +77,8 @@ function toggleReveal(cb){
 
 function render(){
  document.body.innerHTML=
-  `<h2>Window Scramble</h2>`+
-  `<h4>${w.size} words</h4>`+
+  `<h2>This Game</h2>`+
+  `<p>Gets ${w.size} words from the javascript <b>this</b> object</p>`+
   `<div style="margin-bottom:6px">`+
    `Score: ${score} `+
    `Found: ${found.length} of ${1 + validWords.length} `+
