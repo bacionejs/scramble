@@ -7,10 +7,9 @@
 - Letters can be reused. For example, `lesp` gives `spell`.
 
 Penalties:
-- -3 for clicking Rack (complete to get new)
 - -1 for clicking Back (discourages spamming)
-
-Reveal is free. Maybe I'll make it decrement score for every second it is open.
+- -3 for clicking Rack (complete to get new)
+- -5 for clicking Reveal
 
 # Dev Notes
 - Splits: camelcase/pascalcase, underscore
