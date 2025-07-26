@@ -13,7 +13,7 @@ let w=new Set(),s=new WeakSet(),r=/[A-Z]?[a-z]+/g;
  }
 })(this);
 
-let input='',found=[],score=3,letters=[],currentWord='',validWords=[],reveal=false;
+let input='',found=[],score=3,letters=[],currentWord='',validWords=[];
 
 function shuffle(a){
  for(let i=a.length-1;i>0;i--){
@@ -70,9 +70,21 @@ function back(){
  render();
 }
 
-function toggleReveal(cb){
- reveal = cb.checked;
+function revealWords(){
+ score-=5;
+ let old=document.getElementById('reveal');
+ if(old) old.remove();
  render();
+ let div=document.createElement('div');
+ div.id='reveal';
+ div.innerHTML=
+  `<p style="color:#999;font-size:small">Original word: ${currentWord}</p>`+
+  `<p style="color:#999;font-size:small">Other valid words: ${validWords.join(', ')}</p>`;
+ div.style.transition='opacity 5s';
+ div.style.opacity='1';
+ document.body.appendChild(div);
+ setTimeout(()=>div.style.opacity='0',10);
+ setTimeout(()=>div.remove(),5000);
 }
 
 function render(){
@@ -89,11 +101,7 @@ function render(){
   `<br><br><br><br><br><br>`+
   `<a href="#" onclick="back();return false;" style="margin:0 6px;text-decoration:none">Back</a>`+
   `<a href="#" onclick="newRack(true);return false;" style="margin:0 6px;text-decoration:none">Rack</a>`+
-  `<a href="#" onclick="reveal=!reveal;render();return false;" style="margin:0 6px;text-decoration:none">Reveal</a>`+
-  (reveal
-    ? `<p style="color:#999;font-size:small">Original word: ${currentWord}</p>`+
-      `<p style="color:#999;font-size:small">Other valid words: ${validWords.join(', ')}</p>`
-    : '');
+  `<a href="#" onclick="revealWords();return false;" style="margin:0 6px;text-decoration:none">Reveal</a>`;
 }
 
 newRack();
