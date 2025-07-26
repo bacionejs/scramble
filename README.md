@@ -2,8 +2,7 @@
 
 [![Demo – Click to Play](README.jpg)](https://bacionejs.github.io/scramble/)
 
-# 📜 **Scramble Instructions**
-Scramble that gets 1799 words internally from javascript `window` object.
+# 📜 **Instructions**
 
 - Letters can be reused. For example, `lesp` gives `spell`.
 
