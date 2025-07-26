@@ -1,108 +1,113 @@
-<html><body style="font-family:sans-serif;text-align:center"><script>
+<body>
+<script>
+
 let w=new Set(),s=new WeakSet(),r=/[A-Z]?[a-z]+/g;
-;(function f(o,d=0){
- if(d>3||s.has(o)||typeof o!=='object'&&typeof o!=='function'||!o)return;
- s.add(o);
- for(let k of Object.getOwnPropertyNames(o)){
+
+(function f(o,d=0){
+if(d>3||s.has(o)||typeof o!=='object'&&typeof o!=='function'||!o)return;
+s.add(o);
+for(let k of Object.getOwnPropertyNames(o)){
   let parts=k.split('_').flatMap(p=>p.match(r)||[]);
   for(let v of parts){
-   v=v.toLowerCase();
-   if(v.length>2&&!v.startsWith('on'))w.add(v);
+    v=v.toLowerCase();
+    if(v.length>2&&!v.startsWith('on'))w.add(v);
   }
   try{f(o[k],d+1);}catch{}
- }
+}
 })(this);
 
-let input='',found=[],score=3,letters=[],currentWord='',validWords=[];
+let input="",found=[],score=3,letters=[],currentWord="",validWords=[];
 
 function shuffle(a){
- for(let i=a.length-1;i>0;i--){
+for(let i=a.length-1;i>0;i--){
   let j=Math.floor(Math.random()*(i+1));
   let t=a[i];a[i]=a[j];a[j]=t;
- }
- return a;
+}
+return a;
 }
 
-function canMake(word, allowed){
- let temp = [...allowed];
- for(let c of word){
-  let i = temp.indexOf(c);
-  if(i === -1) return false;
+function canMake(word,allowed){
+let temp=[...allowed];
+for(let c of word){
+  let i=temp.indexOf(c);
+  if(i===-1)return false;
   temp.splice(i,1);
- }
- return true;
+}
+return true;
 }
 
 function newRack(penalize=true){
- let words=[...w].filter(v=>v.length>=4);
- if(penalize) score -= 3;
- if(words.length === 0){
+let words=[...w].filter(v=>v.length>=4);
+if(penalize)score-=3;
+if(words.length===0){
   alert("No words found in the window object!");
   return;
- }
- currentWord=words[Math.floor(Math.random()*words.length)];
- letters=shuffle([...new Set(currentWord.split(''))]);
- input='';
- found=[];
- validWords=[...w].filter(v=> v.length>=3 && v!==currentWord && canMake(v, currentWord.split(''))).sort();
- render();
+}
+currentWord=words[Math.floor(Math.random()*words.length)];
+letters=shuffle([...new Set(currentWord.split(""))]);
+input="";
+found=[];
+validWords=[...w].filter(v=>v.length>=3&&v!==currentWord&&canMake(v,currentWord.split(""))).sort();
+render();
 }
 
 function add(c){
- input += c;
- if(found.includes(input)){ render(); return; }
- if(input.length >= 3 && w.has(input) && canMake(input, currentWord.split(''))){
+input+=c;
+if(found.includes(input)){render();return;}
+if(input.length>=3&&w.has(input)&&canMake(input,currentWord.split(""))){
   found.push(input);
-  score += input.length;
-  if(found.length === validWords.length+1){
-   render();
-   setTimeout(() => newRack(false), 1000);
-   return;
+  score+=input.length;
+  if(found.length===validWords.length+1){
+    render();
+    setTimeout(()=>newRack(false),1000);
+    return;
   }
-  input = '';
- }
- render();
+  input="";
+}
+render();
 }
 
 function back(){
- input=input.slice(0,-1);
- score -= 1;
- render();
+input=input.slice(0,-1);
+score-=1;
+render();
 }
 
 function revealWords(){
- score-=5;
- let old=document.getElementById('reveal');
- if(old) old.remove();
- render();
- let div=document.createElement('div');
- div.id='reveal';
- div.innerHTML=
-  `<p style="color:#999;font-size:small">Original word: ${currentWord}</p>`+
-  `<p style="color:#999;font-size:small">Other valid words: ${validWords.join(', ')}</p>`;
- div.style.transition='opacity 5s';
- div.style.opacity='1';
- document.body.appendChild(div);
- setTimeout(()=>div.style.opacity='0',10);
- setTimeout(()=>div.remove(),5000);
+score-=5;
+let old=document.getElementById("reveal");
+if(old)old.remove();
+render();
+let div=document.createElement("div");
+div.id="reveal";
+div.innerHTML=
+  "<p style=color:#999;font-size:small>Original word: "+currentWord+"</p>"+
+  "<p style=color:#999;font-size:small>Other valid words: "+validWords.join(", ")+"</p>";
+div.style.transition="opacity 5s";
+div.style.opacity="1";
+document.body.appendChild(div);
+setTimeout(()=>div.style.opacity="0",10);
+setTimeout(()=>div.remove(),5000);
 }
 
 function render(){
- document.body.innerHTML=
-  `<h2>This Game</h2>`+
-  `<p>Gets ${w.size} words from the javascript <b>this</b> object</p>`+
-  `<div style="margin-bottom:6px">`+
-   `Score: ${score} `+
-   `Found: ${found.length} of ${1 + validWords.length} `+
-  `</div>`+
-  `<p style="min-height:2em">${found.join(', ')}</p>`+
-  `<h3 style="min-height:1.2em">${input}</h3>`+
-  letters.map(c=>`<button onclick="add('${c}')">${c}</button>`).join(' ')+
-  `<br><br><br><br><br><br>`+
-  `<a href="#" onclick="back();return false;" style="margin:0 6px;text-decoration:none">Back</a>`+
-  `<a href="#" onclick="newRack(true);return false;" style="margin:0 6px;text-decoration:none">Rack</a>`+
-  `<a href="#" onclick="revealWords();return false;" style="margin:0 6px;text-decoration:none">Reveal</a>`;
+document.body.innerHTML=
+  "<style> body{ font-family:sans-serif; text-align:center; } a{ margin:0 6px; text-decoration:none; } </style>"+
+  "<h2>This Game</h2>"+
+  "<p>Gets "+w.size+" words from the javascript <b>this</b> object</p>"+
+  "<div style=margin-bottom:6px>"+
+  "Score: "+score+" "+
+  "Found: "+found.length+" of "+(1+validWords.length)+" "+
+  "</div>"+
+  "<p style=min-height:2em>"+found.join(", ")+"</p>"+
+  "<h3 style=min-height:1.2em>"+input+"</h3>"+
+  letters.map(c=>"<button onclick=add('"+c+"')>"+c+"</button>").join(" ")+
+  "<br><br><br><br><br><br>"+
+  "<a href=# onclick=back(); >Back</a>"+
+  "<a href=# onclick=newRack(true); >Rack</a>"+
+  "<a href=# onclick=revealWords(); >Reveal</a>";
 }
 
 newRack();
-</script></body></html>
+</script>
+</body>
